@@ -1,0 +1,6 @@
+---
+  - name: install php related packages
+    yum:
+      name: ['php', 'php-mysql']
+      state: present
+    notify: restart apache services

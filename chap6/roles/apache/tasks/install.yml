@@ -1,0 +1,6 @@
+---
+  - name: Install apache web server
+    yum:
+      name: httpd
+      state: installed
+
