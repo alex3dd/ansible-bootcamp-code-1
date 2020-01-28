@@ -1,4 +1,6 @@
 ---
-- name: Starting Apache...
-  service: name=httpd state=started
-  
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+

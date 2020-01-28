@@ -1,0 +1,6 @@
+---
+  fav:
+    color: color_from_group_vars_prod.yml
+    fruit: fruit_from_group_vard_prod.yml
+
+  

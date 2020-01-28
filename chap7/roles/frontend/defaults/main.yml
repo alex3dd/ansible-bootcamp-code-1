@@ -1,2 +1,22 @@
 ---
 # defaults file for frontend
+  app:
+    version: 1.5
+    env: LOCALDEV
+
+  fav:
+    color: color_roles_frontend_defaults_main.yml
+    fruit: fruit_roles_frontend_defaults_main.yml
+    car: Mazda  
+    laptop: HP 
+
+  dbconn:
+    host: localhost
+    user: root
+    pass: changeme
+    db: devopsdemo 
+
+
+
+  
+  
