@@ -1,0 +1,42 @@
+---
+  - name: base systems configuration
+    hosts: lb
+    become: true
+    gather_facts: no
+    tasks:
+      - name: create user webadmin
+        user:
+          name: webadmin
+          shell: /bin/sh
+          state: present
+        tags: create_user_webadmin
+
+      - name: add repository for nginx
+        yum_repository:
+          name: epel
+          description: EPEL YUM repo
+          baseurl: http://nginx.org/packages/centos/6/x86_64
+          gpgcheck: no
+        tags: add_repo   
+
+      - name: install nginx
+        yum:
+          name: [ 'nginx', 'git' ]
+          state: present
+        tags: install_apps
+
+      - name: start nginx service
+        service:
+          name: nginx
+          state: started
+
+
+      - name: deploy simple web app
+        git:
+          repo:  'https://github.com/schoolofdevops/html-sample-app.git'
+          dest: /usr/share/nginx/html/app
+        tags: deploy_web_app
+          
+
+  
+

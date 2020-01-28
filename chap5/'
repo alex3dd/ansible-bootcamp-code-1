@@ -1,0 +1,26 @@
+---
+  - name: base systems configuration
+    hosts: prod
+    become: true
+    tasks:
+      - name: create admin user 
+        user:
+          name: admin
+          state: present
+          uid: 5001
+          group: admin 
+
+      - name: remove user dojo if present
+        user:
+          name: dojo 
+          state: absent
+
+
+
+      - name: install tree
+
+
+
+      - name: install ntp
+
+

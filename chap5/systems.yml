@@ -1,0 +1,53 @@
+---
+  - name: base systems configuration
+    hosts: prod
+    become: true
+    gather_facts: no
+    tasks:
+      - name: create admin user 
+        user:
+          name: admin
+          state: present
+          uid: 5001
+          group: admin
+
+      - name: remove user dojo if present
+        user:
+          name: dojo 
+          state: absent
+
+      - name: install tree
+        yum:
+          name: tree
+          state: present
+
+      - name: install ntp
+        yum:
+          name: ntp
+          state: present
+
+      - name: start ntpd service
+        service:
+          name: ntpd
+          state: started 
+
+  - name: another playbook
+    hosts: app
+    become: true
+    gather_facts: no
+    tasks:
+      - name: create_user_deploy
+        user:
+          name: deploy
+          uid: 5003
+          state: present
+
+      - name: install_git     
+        package:
+          name: git
+          state: installed
+
+
+
+
+
