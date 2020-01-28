@@ -1,44 +1,46 @@
 ---
-# tasks file for frontend
+  - name: Install unzip package
+    yum:
+      name: unzip
+      state: installed
+  
+  - name: download package
+    get_url:
+      url: https://github.com/devopsdemoapps/devops-demo-app/archive/{{ app.version }}.zip
+      dest: /tmp/devops-demo-app-{{ app.version }}.zip
+      mode: '0644'
+    tags: download_package
 
-- name: create app directory
-  file:
-    path: /opt/app
-    owner: apache
-    group: apache
-    mode: 0755
-    state: directory
+  - name: Create a directory if it does not exist
+    file:
+      path: /opt/app/releases/devops-demo-app-{{ app.version }}
+      state: directory
+      mode: '0755'
+    tags: create_dir
 
-- name: create release path
-  file:
-    path: /opt/app/release
-    owner: apache
-    group: apache
-    mode: 0755
-    state: directory
+  - name: unzup archive
+    unarchive:
+      src: /tmp/devops-demo-app-{{ app.version }}.zip
+      dest: /opt/app/releases/
+      #creates: /opt/app/releases/devops-demo-app-1.0
+      remote_src: yes
+      owner: apache
+      group: apache
+    tags: unzip_archive
 
+  - name: Create a symbolic link
+    file:
+      src: /opt/app/releases/devops-demo-app-{{ app.version }}
+      dest: /var/www/html/app
+      owner: apache
+      group: apache
+      state: link
+    tags: createa_sym_link
 
-- name: Download and extract the release
-  unarchive:
-    src: https://github.com/devopsdemoapps/devops-demo-app/archive/{{ app.version }}.tar.gz
-    dest: /opt/app/release
-    owner: apache
-    group: apache
-    creates: /opt/app/release/devops-demo-app-{{ app.version }}
-    remote_src: yes
-
-- name: create a symlink
-  file:
-    src: /opt/app/release/devops-demo-app-{{ app.version }}
-    dest: /var/www/html/app
-    owner: apache
-    group: apache
-    state: link
-
-- name: add application configs
-  template:
-    src: config.ini.j2
-    dest: /var/www/html/app/config.ini
-    owner: apache
-    group: apache
-    mode: 0644
+  - name: Update application configuration
+    template:
+      src: config.ini.j2
+      dest: /var/www/html/app/config.ini
+      owner: apache
+      group: apache
+      mode: 0644

@@ -5,13 +5,18 @@
     env: LOCALDEV
 
   fav:
-    color: magenta
-    fruit: orange
-    car: chevy
-    laptop: toshiba
+    color: color_roles_frontend_defaults_main.yml
+    fruit: fruit_roles_frontend_defaults_main.yml
+    car: Mazda  
+    laptop: HP 
 
   dbconn:
     host: localhost
     user: root
     pass: changeme
-    db: devopsdemo
+    db: devopsdemo 
+
+
+
+  
+  

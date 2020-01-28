@@ -1,11 +1,15 @@
 ---
-  - hosts: app
+  - name: App servers playbook
+    hosts: app
     become: true
+    gather_facts: no
     vars:
       fav:
-        fruit: mango
+        color: color_from_app.yml
+        fruit: fruit_from_app.yml 
     roles:
       - apache
-      - php 
+      - php
       - frontend
-      
+      # we do not have to add role systems because it was added into apache/meta/main.yml dependensies
+
