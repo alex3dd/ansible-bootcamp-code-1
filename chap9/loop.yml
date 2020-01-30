@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars: 
+    foo: true
+    bar: "lll"
+  tasks:
+    - debug: 
+        msg:  'Name: "{{ item.name }}" and group "{{ item.groups }}" '
+      loop: 
+        - { name: 'alex', groups: 'wheel' }
+        - { name: 'boris', groups: 'root' }
+
+

@@ -1,18 +1,20 @@
 [local]
 localhost ansible_connection=local
 
-[lb]
-lb
 
 [app]
 app1
 app2
 app3 ansible_user=devops ansible_ssh_pass=codespaces
 
+[lb]
+lb
+
 [db]
 db
 
+
 [prod:children]
-lb
 app
+lb
 db

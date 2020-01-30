@@ -1,0 +1,24 @@
+---
+  - name: App servers playbook
+    hosts: localhost
+    tasks:
+      - command: echo {{ item }}
+        with_items: [1,2,3,4,5,6]
+        when: item > 5
+        tags: cmd1
+      
+      - shell: ls
+        register: shell_result
+        tags: cmd2
+      - debug:
+          var: shell_result.stdout_lines
+        tags: cmd3
+
+      - command: hostname -i
+        when: (ansible_facts['os_family'] == "Redhat") or (ansible_facts['os_family'] == "Debian")
+ 
+        register: shell_result
+        tags: cmd4
+      - debug:
+          var: shell_result.stdout
+        tags: cmd4  

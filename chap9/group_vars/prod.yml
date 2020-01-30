@@ -1,29 +1,31 @@
 ---
-
-  users:
+  app_server_users:
     admin:
+      name: admin
       uid: 5001
       shell: /bin/bash
       home: /home/admin
+      group: admin
       state: present
     dojo:
       state: absent
-      
-  systems: 
-    packages: 
-      - ntp 
-      - tree 
+     
+  app_server_packages:
+    packages:
+      - ntp
+      - tree
       - vim
 
   fav:
-    color: yellow
-    fruit: guava
+    color: color_from_group_vars_prod.yml
+    fruit: fruit_from_group_vard_prod.yml
 
   dbconn:
     host: 192.168.61.14
     user: devops
-    pass: GKkdw72Jil0ld
+    pass: DevOps1234
     db: devopsdemo
+
 
   haproxy_backend_servers:
     - name: app1
@@ -32,11 +34,11 @@
       address: 192.168.61.13:80
     - name: app3
       address: 192.168.61.15:80
+
   haproxy_backend_httpchk: ''
   haproxy_socket: /var/run/haproxy.sock
-
-
-  mysql_root_password: wxCb3snfSdG
+  
+  mysql_root_password: MySqlRoot1234
   mysql_databases:
     - name: devopsdemo
       encoding: latin1
@@ -44,6 +46,8 @@
   mysql_users:
     - name: devops
       host: "%"
-      password: GKkdw72Jil0ld
+      password: DevOps1234
       priv: "devopsdemo.*:ALL"
+
   mysql_bind_address: '0.0.0.0'
+ 
