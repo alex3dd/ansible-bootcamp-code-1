@@ -1,6 +1,8 @@
 ---
-  apache: 
+# vars file for apache
+  apache:
     package: apache2
     service: 
       name: apache2
       state: started
+

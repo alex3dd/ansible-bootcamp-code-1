@@ -1,15 +1,17 @@
 ---
-  users:
+  app_server_users:
     admin:
+      name: admin
       uid: 5001
       shell: /bin/bash
       home: /home/admin
+      group: admin
       state: present
     dojo:
       state: absent
-      
-  systems: 
-    packages: 
-      - ntp 
-      - tree 
+
+  app_server_packages:
+    packages:
+      - ntp
+      - tree
       - vim

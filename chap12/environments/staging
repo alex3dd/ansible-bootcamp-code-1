@@ -2,9 +2,9 @@
 app2
 
 [db]
-app2 
+app2
+
 
 [staging:children]
 app
 db
-

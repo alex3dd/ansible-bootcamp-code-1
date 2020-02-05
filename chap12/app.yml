@@ -1,13 +1,18 @@
 ---
-  - hosts: app
+  - name: App servers playbook
+    hosts: app
     become: true
+    #gather_facts: no
     vars:
       fav:
-        fruit: mango
+        color: color_from_app.yml
+        fruit: fruit_from_app.yml 
     roles:
-      - { role: apache, tags: www }
-      - { role: php, tags: [ 'www', 'php' ] }
-      - { role: frontend, tags: devopsdemo }
-    tags: 
-      - frontend
+      - { role: apache, tags: role_apache }
+      - { role: php, tags: role_php }
+      - { role: frontend, tags: role_frontend }
       
+      # we ran this taks before we installed app3 server
+      #- { role: frontend, when: ansible_os_family == 'RedHat', tags: role_frontend }
+      # we do not have to add role systems because it was added into apache/meta/main.yml dependensies
+

@@ -1,18 +1,18 @@
 ---
-# tasks file for systems
-  - name: create systems users
-    user: 
+  - name: create system user 
+    user:
       name: "{{ item.key }}"
-      uid:  "{{ item.value.uid | default('none') }}"
+      uid: "{{ item.value.uid | default('none') }}"
       shell: "{{ item.value.shell | default('none') }}"
-      home: "{{ item.value.home  | default('none')  }}"
-      state: "{{ item.value.state  | default('none') }}"
-    with_dict: "{{ users }}"
- 
-      
-  - name: install common systems packages
-    package:  
-      name:  "{{ item }}"
+      home: "{{ item.value.home | default('none') }}"
+      #group: "{{ item.value.group | default('none') }}"
+      state: "{{ item.value.state | default('none') }}"
+    with_dict: "{{ app_server_users }}"
+   
+
+  - name: install common system packages
+    package:
+      name: "{{ item }}"
       state: installed
-    with_items: 
-      - "{{ systems.packages }}"
+    with_items:
+      - "{{ app_server_packages.packages }}"

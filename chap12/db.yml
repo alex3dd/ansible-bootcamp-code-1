@@ -1,6 +1,28 @@
---- 
-  - name: playbook to configure db servers 
+---
+  - name: setting up Mysql database
     hosts: db
-    become: yes
+    # global variables will be taken from group_vars prod.yml by default
+    become: true
     roles:
       - { role: geerlingguy.mysql }
+    tasks:
+      - name: Download database schema 
+        get_url:
+          url: https://raw.githubusercontent.com/devopsdemoapps/devops-demo-app/master/data/devops-demo-{{ app.version }}.sql
+          dest: /tmp/devops-demo-{{ app.version }}.sql
+          mode: '0440'
+        tags: download_db_schema
+        
+
+      - name: Schema Migrate
+        mysql_db:
+          name: "{{ dbconn.db }}"
+          login_host: "{{ dbconn.host }}"
+          login_password: "{{ dbconn.pass }}"
+          login_user: "{{ dbconn.user }}"
+          state: import
+          target: /tmp/devops-demo-{{ app.version }}.sql
+        tags: schema_migrate
+
+
+

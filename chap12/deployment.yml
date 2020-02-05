@@ -1,0 +1,38 @@
+---
+  - import_playbook: db.yml
+
+
+  - name: Application deployment
+    hosts: app
+    become: true
+    max_fail_percentage: 40
+    serial: 1
+    vars:
+      app:
+        version: 1.6
+
+    pre_tasks:
+      - name: disable app server from load balancer
+        haproxy:
+          state: disabled
+          host: '{{ inventory_hostname }}'
+        delegate_to: lb
+
+
+    roles:
+      - apache
+      
+    post_tasks:
+      - name: Wait 300 seconds for port 80 to be available
+        wait_for:
+          port: 80
+          host: '{{ inventory_hostname }}'
+          delay: 5
+          timeout: 300
+        connection: local
+
+      - name: add app server back to load balancer
+        haproxy:
+          host: '{{ inventory_hostname }}'
+          state: enabled
+        delegate_to: lb
