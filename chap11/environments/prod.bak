@@ -1,0 +1,26 @@
+[local]
+localhost ansible_connection=local
+
+
+[app]
+app1
+app2
+app3
+
+[app3]
+app3 
+
+[app3:vars]
+ansible_user=devops 
+ansible_ssh_pass={{ win_pass }}
+
+[db]
+db
+
+[lb]
+lb
+
+[prod:children]
+app
+lb
+db

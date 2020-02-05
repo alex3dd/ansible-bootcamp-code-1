@@ -1,9 +1,9 @@
 ---
-- name: Install Apache...
-  package: 
-    name: "{{ apache.package }}" 
-    state: latest
-    
-  tags: 
-    - apache 
-    - install
+  - name: Install apache web server
+    package:
+      name: "{{ apache.package }}"
+      state: latest
+    tags: 
+      - apache
+      - install
+

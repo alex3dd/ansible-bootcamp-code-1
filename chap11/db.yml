@@ -1,6 +1,7 @@
---- 
-  - name: playbook to configure db servers 
+---
+  - name: setting up Mysql database
     hosts: db
-    become: yes
+    # global variables will be taken from group_vars prod.yml by default
+    become: true
     roles:
       - { role: geerlingguy.mysql }

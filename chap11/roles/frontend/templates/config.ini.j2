@@ -1,27 +1,26 @@
-
 [database]
-hostname = {{ dbconn['host'] }}
-username = {{ dbconn['user'] }}
-password = {{ dbconn['pass'] }}
-dbname = {{ dbconn['db'] }}
+hostname = {{ dbconn.host }}
+username = {{ dbconn.user }}
+password = {{ dbconn.pass }}
+dbname = {{ dbconn.db }}
 
 [environment]
-environment = {{ app['env'] }}
+environment = {{ app.env }}
 
 [prefs]
-{% if fav.color is defined %} 
+{%if fav.color is defined %}
 color  = {{ fav['color'] }}
 {% endif %}
 
-{% if fav.fruit is defined %} 
+{%if fav.fruit is defined %}
 fruit  = {{ fav['fruit'] }}
 {% endif %}
 
-{% if fav.car is defined %} 
+{%if fav.car is defined %}
 car    = {{ fav['car'] }}
 {% endif %}
 
-{% if fav.laptop is defined %} 
+{%if fav.laptop is defined %}
 laptop = {{ fav['laptop'] }}
 {% endif %}
 

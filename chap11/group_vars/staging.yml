@@ -1,8 +1,7 @@
 ---
-
-  app: 
-    version: 1.5 
-    env: staging
+  app:
+    version: 1.5
+    env: STAGING
 
   fav:
     color: blue
@@ -11,10 +10,10 @@
   dbconn:
     host: 127.0.0.1
     user: devops
-    pass: dfkl8d6msoYc0
+    pass: DevOps1234
     db: devopsdemo
 
-  mysql_root_password: dfdvdHkst0ks72sY
+  mysql_root_password: MySqlRoot1234
   mysql_databases:
     - name: devopsdemo
       encoding: latin1
@@ -22,5 +21,6 @@
   mysql_users:
     - name: devops
       host: "%"
-      password: dfkl8d6msoYc0
+      password: DevOps1234
       priv: "devopsdemo.*:ALL"
+
